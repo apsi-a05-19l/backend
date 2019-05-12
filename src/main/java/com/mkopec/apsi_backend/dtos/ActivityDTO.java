@@ -1,7 +1,7 @@
 package com.mkopec.apsi_backend.dtos;
 
 public class ActivityDTO {
-    public Long id;
+    public Integer id;
 
     public java.util.Calendar date;
 

@@ -1,16 +1,20 @@
 package com.mkopec.apsi_backend.domain;
 
+
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
-@Entity
 @Table(name = "Activity")
+@Entity
 @Data
 public class Activity {
+
+    @Column(name = "idActivity" )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "date")
     @Basic
@@ -21,12 +25,8 @@ public class Activity {
     private Integer points;
 
     @Column(name = "ActivityTag_name")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "name")
     private String name;
 
     @Column(name = "Person_idPerson")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "name")
-    private Person person;
+    private Integer personID;
 }
