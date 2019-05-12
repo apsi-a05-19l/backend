@@ -1,17 +1,15 @@
 package com.mkopec.apsi_backend.domain;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Table(name = "Activity")
 @Entity
 @Data
 public class Activity {
 
-    @Column(name = "idActivity" )
+    @Column(name = "idActivity")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,4 +27,5 @@ public class Activity {
 
     @Column(name = "Person_idPerson")
     private Integer personID;
+
 }

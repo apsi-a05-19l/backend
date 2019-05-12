@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Table(name = "Person")
 @Entity
-@Data
 public class Person {
 
     @Column(name = "idPerson")
@@ -31,5 +30,4 @@ public class Person {
 
     @Column(name = "RoleInClub_name")
     private String roleInClub;
-
 }

@@ -5,7 +5,7 @@ import com.mkopec.apsi_backend.domain.Activity;
 import java.util.List;
 
 public class PersonDTO {
-    public Long id;
+    public Integer id;
 
     public String firstName;
 

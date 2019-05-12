@@ -25,14 +25,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public PersonDTO getSinglePerson(@PathVariable Integer id) {
-        Person person = null;
-        try {
-            person = personService.getSinglePerson(id);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        
+        Person person = personService.getSinglePerson(id);
         return mapper.toPersonDTO(person);
     }
 
