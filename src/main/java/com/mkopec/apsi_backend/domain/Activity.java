@@ -1,12 +1,17 @@
 package com.mkopec.apsi_backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Table(name = "Activity")
 @Entity
-@Data
+@Setter
+@Getter
 public class Activity {
 
     @Column(name = "idActivity")
@@ -25,7 +30,10 @@ public class Activity {
     @Column(name = "ActivityTag_name")
     private String name;
 
-    @Column(name = "Person_idPerson")
-    private Integer personID;
+//    @Column(name = "Person_idPerson")
+//    private Integer personID;
 
+    @ManyToOne
+    @JoinColumn(name = "Person_idPerson")
+    private Person person;
 }
