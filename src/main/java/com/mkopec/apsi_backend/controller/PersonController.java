@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/members")
 public class PersonController {
     @Autowired
     private PersonService personService;
@@ -50,7 +50,7 @@ public class PersonController {
         return null;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<PersonDTO> getAllPersons() {
         List<Person> personList = personService.getAllPersons();
         List<PersonDTO> personDTOList = new ArrayList<>();
