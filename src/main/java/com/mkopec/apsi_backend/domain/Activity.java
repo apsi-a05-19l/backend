@@ -31,9 +31,9 @@ public class Activity {
     private String name;
 
 //    @Column(name = "Person_idPerson")
-//    private Integer personID;
+//    private Integer idPerson;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Person_idPerson")
     private Person person;
 }

@@ -38,9 +38,6 @@ public class Person {
     @Column(name = "RoleInClub_name")
     private String roleInClub;
 
-//    @OneToMany
-//    @JoinColumn(name = "id")
-//    private List<Activity> activities;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id", orphanRemoval = true ,fetch = FetchType.LAZY)
-//    private List<Activity> activities;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.LAZY)
+    private List<Activity> activities;
 }

@@ -1,21 +1,28 @@
 package com.mkopec.apsi_backend.dtos;
 
 import com.mkopec.apsi_backend.domain.Activity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class PersonDTO {
-    public Integer id;
+    private Integer id;
 
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
-    public String phone_number;
+    private String phone_number;
 
-    public String email;
+    private String email;
 
-    public java.util.Calendar dateFrom;
+    private java.util.Calendar dateFrom;
 
-    public String roleInClub;
+    private String roleInClub;
+
+    private List<ActivityDTO> activities;
 }

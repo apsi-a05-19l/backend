@@ -6,9 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class PersonMapper {
-
+    @Mapping(source = "activities", target = "activities")
     public abstract PersonDTO toPersonDTO(Person person);
 
     public abstract Person toPerson(PersonDTO personDTO);
