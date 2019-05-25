@@ -31,4 +31,7 @@ public class Project {
 
     @ManyToMany(mappedBy = "projects")
     private List<Person> persons;
+
+    @OneToMany(mappedBy = "project")
+    private List<Report> reports;
 }
