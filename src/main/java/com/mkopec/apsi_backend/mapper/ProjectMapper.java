@@ -3,6 +3,7 @@ package com.mkopec.apsi_backend.mapper;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.Project;
 import com.mkopec.apsi_backend.dtos.FullProjectDTO;
+import com.mkopec.apsi_backend.dtos.ProjectPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortProjectDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -35,4 +36,7 @@ public abstract class ProjectMapper {
     protected String nameDetails(Person person) {
         return person.getFirstName() + " " + person.getLastName();
     }
+
+    @Mapping(target = "name", source = "name")
+    public abstract Project toProject(ProjectPostDTO projectPostDTO);
 }

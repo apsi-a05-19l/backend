@@ -22,4 +22,12 @@ public class ProjectService {
     public Project getSingleProject(Integer id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project", "id", id));
     }
+
+    public Project saveProject(Project project) {
+        return repository.save(project);
+    }
+
+    public void deleteProject(Integer id) {
+        repository.deleteById(id);
+    }
 }
