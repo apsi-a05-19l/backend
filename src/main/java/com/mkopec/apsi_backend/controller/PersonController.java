@@ -6,13 +6,11 @@ import com.mkopec.apsi_backend.dtos.PersonDTO;
 import com.mkopec.apsi_backend.dtos.ShortPersonDTO;
 import com.mkopec.apsi_backend.mapper.PersonMapper;
 import com.mkopec.apsi_backend.service.PersonService;
-import org.mapstruct.factory.Mappers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,10 +18,11 @@ import java.util.List;
 public class PersonController {
     private final PersonService personService;
 
-    private PersonMapper mapper = Mappers.getMapper(PersonMapper.class);
+    private final PersonMapper mapper;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, PersonMapper mapper) {
         this.personService = personService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/{id}")
@@ -35,11 +34,6 @@ public class PersonController {
     @GetMapping
     public List<ShortPersonDTO> getAllPersons() {
         List<Person> personList = personService.getAllPersons();
-        List<ShortPersonDTO> personDTOList = new ArrayList<>();
-
-        for (Person p : personList) {
-            personDTOList.add(mapper.toShortPersonDTO(p));
-        }
-        return personDTOList;
+        return mapper.toShortPersonDTOs(personList);
     }
 }

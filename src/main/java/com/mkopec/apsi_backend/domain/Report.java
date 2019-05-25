@@ -27,4 +27,8 @@ public class Report {
     @ManyToOne
     @JoinColumn(name = "Project_id")
     private Project project;
+
+    @ManyToOne
+    @JoinColumn(name = "Person_id")
+    private Person person;
 }

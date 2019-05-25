@@ -6,7 +6,6 @@ import com.mkopec.apsi_backend.dtos.ActivityPostDTO;
 import com.mkopec.apsi_backend.mapper.ActivityMapper;
 import com.mkopec.apsi_backend.service.ActivityService;
 import com.mkopec.apsi_backend.service.PersonService;
-import org.mapstruct.factory.Mappers;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -18,11 +17,12 @@ public class ActivityController {
     private final ActivityService activityService;
     private final PersonService personService;
 
-    private ActivityMapper mapper = Mappers.getMapper(ActivityMapper.class);
+    private final ActivityMapper mapper;
 
-    public ActivityController(ActivityService activityService, PersonService personService) {
+    public ActivityController(ActivityService activityService, PersonService personService, ActivityMapper mapper) {
         this.activityService = activityService;
         this.personService = personService;
+        this.mapper = mapper;
     }
 
     @GetMapping
