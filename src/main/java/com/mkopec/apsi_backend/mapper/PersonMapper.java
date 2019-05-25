@@ -8,13 +8,19 @@ import com.mkopec.apsi_backend.dtos.SimplePersonDTO;
 import com.mkopec.apsi_backend.enums.RoleType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class PersonMapper {
-    @Mapping(source = "activities", target = "activities")
-    @Mapping(target = "roleInClub", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
+
+    @Autowired
+    protected ProjectMapper projectMapper;
+
+    @Mapping(target = "activities", source = "activities")
+    @Mapping(target = "organizationStatus", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
+    @Mapping(target = "projects", expression = "java(projectMapper.toShortProjectDTOs(person.getProjects()))")
     public abstract PersonDTO toPersonDTO(Person person);
 
     public RoleType roleInClubToRoleType(RoleInClub roleInClub) {

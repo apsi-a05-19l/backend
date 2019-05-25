@@ -11,17 +11,15 @@ import java.util.List;
 public class PersonDTO {
     private Integer id;
 
-    private String firstName;
+    private String name;
 
-    private String lastName;
+    private String surname;
 
-    private String phone_number;
+    private RoleType organizationStatus;
 
-    private String email;
+    private Integer points;
 
-    private java.util.Calendar dateFrom;
-
-    private RoleType roleInClub;
+    private List<ShortProjectDTO> projects;
 
     private List<ActivityDTO> activities;
 }
