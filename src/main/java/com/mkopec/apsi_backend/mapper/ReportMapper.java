@@ -3,6 +3,7 @@ package com.mkopec.apsi_backend.mapper;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.Report;
 import com.mkopec.apsi_backend.dtos.ReportDTO;
+import com.mkopec.apsi_backend.dtos.ReportPostDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -21,4 +22,13 @@ public abstract class ReportMapper {
         Person p = report.getPerson();
         return p.getFirstName() + " " + p.getLastName();
     }
-}
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "content", source = "text")
+    public abstract Report toReport(ReportPostDTO reportPostDTO);
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "text", source = "content")
+    @Mapping(target = "author", expression = "java(getPersonName(report))")
+    public abstract ReportPostDTO toReportPostDTO(Report report);
+ }
