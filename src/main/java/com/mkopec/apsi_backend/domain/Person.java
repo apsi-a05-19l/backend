@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 public class Person {
 
-    @Column(name = "idPerson")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,8 +35,12 @@ public class Person {
     @Column(name = "date_from")
     private java.util.Calendar dateFrom;
 
-    @Column(name = "RoleInClub_name")
-    private String roleInClub;
+    @ManyToOne
+    @JoinColumn(name = "RoleinClub_id")
+    private RoleInClub roleInClub;
+
+    @Column(name = "points")
+    private Integer points;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.LAZY)
     private List<Activity> activities;

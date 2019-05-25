@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 public class Activity {
 
-    @Column(name = "idActivity")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,13 +27,13 @@ public class Activity {
     @Column(name = "points")
     private Integer points;
 
-    @Column(name = "ActivityTag_name")
+    @Column(name = "ActivityTag_id")
     private String name;
 
 //    @Column(name = "Person_idPerson")
 //    private Integer idPerson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Person_idPerson")
+    @JoinColumn(name = "Person_id")
     private Person person;
 }

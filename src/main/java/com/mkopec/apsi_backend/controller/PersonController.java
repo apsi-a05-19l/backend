@@ -3,6 +3,7 @@ package com.mkopec.apsi_backend.controller;
 
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.dtos.PersonDTO;
+import com.mkopec.apsi_backend.dtos.ShortPersonDTO;
 import com.mkopec.apsi_backend.mapper.PersonMapper;
 import com.mkopec.apsi_backend.service.PermissionService;
 import com.mkopec.apsi_backend.service.PersonService;
@@ -51,12 +52,12 @@ public class PersonController {
     }
 
     @GetMapping
-    public List<PersonDTO> getAllPersons() {
+    public List<ShortPersonDTO> getAllPersons() {
         List<Person> personList = personService.getAllPersons();
-        List<PersonDTO> personDTOList = new ArrayList<>();
+        List<ShortPersonDTO> personDTOList = new ArrayList<>();
 
         for (Person p : personList) {
-            personDTOList.add(mapper.toPersonDTO(p));
+            personDTOList.add(mapper.toShortPersonDTO(p));
         }
         return personDTOList;
     }

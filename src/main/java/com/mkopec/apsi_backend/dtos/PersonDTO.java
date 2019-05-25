@@ -1,6 +1,7 @@
 package com.mkopec.apsi_backend.dtos;
 
 import com.mkopec.apsi_backend.domain.Activity;
+import com.mkopec.apsi_backend.enums.RoleType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class PersonDTO {
 
     private java.util.Calendar dateFrom;
 
-    private String roleInClub;
+    private RoleType roleInClub;
 
     private List<ActivityDTO> activities;
 }
