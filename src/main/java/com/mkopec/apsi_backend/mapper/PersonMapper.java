@@ -7,7 +7,6 @@ import com.mkopec.apsi_backend.dtos.ShortPersonDTO;
 import com.mkopec.apsi_backend.enums.RoleType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public abstract class PersonMapper {
@@ -15,12 +14,10 @@ public abstract class PersonMapper {
     @Mapping(target= "roleInClub", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
     public abstract PersonDTO toPersonDTO(Person person);
 
-    // public abstract Person toPerson(PersonDTO personDTO);
-
     public RoleType roleInClubToRoleType(RoleInClub roleInClub) {
         return roleInClub.getName();
     }
-    
+
     @Mapping(target = "name", source = "firstName")
     @Mapping(target = "surname", source = "lastName")
     @Mapping(target = "organizationStatus", source = "roleInClub")

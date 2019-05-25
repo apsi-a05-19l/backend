@@ -44,4 +44,12 @@ public class Person {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.LAZY)
     private List<Activity> activities;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Persons_Projects",
+            joinColumns = @JoinColumn(name = "Person_id"),
+            inverseJoinColumns = @JoinColumn(name = "Project_id")
+    )
+    private List<Project> projects;
 }
