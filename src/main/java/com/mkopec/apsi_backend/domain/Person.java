@@ -6,10 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name = "Person")
-@Entity
-@Setter
 @Getter
+@Setter
+@Entity
+@Table(name = "Person")
 public class Person {
 
     @Column(name = "id")

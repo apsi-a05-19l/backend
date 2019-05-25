@@ -5,10 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Table(name = "Activity")
-@Entity
-@Setter
 @Getter
+@Setter
+@Entity
+@Table(name = "Activity")
 public class Activity {
 
     @Column(name = "id")

@@ -23,12 +23,6 @@ public abstract class ReportMapper {
         return p.getFirstName() + " " + p.getLastName();
     }
 
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "content", source = "text")
     public abstract Report toReport(ReportPostDTO reportPostDTO);
-
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "text", source = "content")
-    @Mapping(target = "author", expression = "java(getPersonName(report))")
-    public abstract ReportPostDTO toReportPostDTO(Report report);
  }

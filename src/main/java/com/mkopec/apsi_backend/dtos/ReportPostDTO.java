@@ -7,11 +7,5 @@ import lombok.Setter;
 @Setter
 public class ReportPostDTO {
 
-    private Integer id;
-
     private String text;
-
-    private String author;
-
-    private Integer projectID;
 }
