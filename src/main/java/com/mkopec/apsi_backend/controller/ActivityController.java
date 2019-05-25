@@ -8,22 +8,23 @@ import com.mkopec.apsi_backend.mapper.ActivityMapper;
 import com.mkopec.apsi_backend.service.ActivityService;
 import com.mkopec.apsi_backend.service.PersonService;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @RestController
 @RequestMapping("/activity")
 public class ActivityController {
-    @Autowired
-    private ActivityService activityService;
-    @Autowired
-    private PersonService personService;
+    private final ActivityService activityService;
+    private final PersonService personService;
 
     private ActivityMapper mapper = Mappers.getMapper(ActivityMapper.class);
+
+    public ActivityController(ActivityService activityService, PersonService personService) {
+        this.activityService = activityService;
+        this.personService = personService;
+    }
 
     @GetMapping
     public List<ActivityDTO> getAllActivities() {

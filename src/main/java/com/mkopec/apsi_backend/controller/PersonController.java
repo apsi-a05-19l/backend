@@ -18,37 +18,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/members")
 public class PersonController {
-    @Autowired
-    private PersonService personService;
-
-    private AuthenticationController authenticationController;
-
-    @Autowired
-    private PermissionService permissionService;
+    private final PersonService personService;
+    private final PermissionService permissionService;
 
     private PersonMapper mapper = Mappers.getMapper(PersonMapper.class);
 
+    public PersonController(PermissionService permissionService, PersonService personService) {
+        this.permissionService = permissionService;
+        this.personService = personService;
+    }
+
     @GetMapping("/{id}")
-    public PersonDTO getSinglePerson(@RequestHeader(value = "Token") String token, @PathVariable Integer id) {
+    public PersonDTO getSinglePerson(@PathVariable Integer id) {
+        Person person = personService.getSinglePerson(id);
+        return mapper.toPersonDTO(person);
 
-        Long userId = null;
-        try {
-            userId = authenticationController.getUserID(token);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (permissionService.hasPermission(userId, "endpoint")) {
-
-            Person person = personService.getSinglePerson(id);
-            return mapper.toPersonDTO(person);
-        }
-        else {
-            // error 401
-        }
-
-        return null;
     }
 
     @GetMapping
