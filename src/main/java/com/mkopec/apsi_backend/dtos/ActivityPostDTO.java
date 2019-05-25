@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ActivityDTO {
+public class ActivityPostDTO {
 
     private Integer id;
 
-    private Integer points;
+    private String activityName;
 
-    private String name;
+    private Integer activityPoints;
 }

@@ -27,11 +27,11 @@ public class Activity {
     @Column(name = "points")
     private Integer points;
 
-    @Column(name = "ActivityTag_id")
+    @Column(name = "name")
     private String name;
 
-//    @Column(name = "Person_idPerson")
-//    private Integer idPerson;
+    @Column(name = "ActivityTag_id")
+    private Integer activityTagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Person_id")
