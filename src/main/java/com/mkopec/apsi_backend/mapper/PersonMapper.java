@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public abstract class PersonMapper {
     @Mapping(source = "activities", target = "activities")
-    @Mapping(target= "roleInClub", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
+    @Mapping(target = "roleInClub", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
     public abstract PersonDTO toPersonDTO(Person person);
 
     public RoleType roleInClubToRoleType(RoleInClub roleInClub) {
@@ -21,5 +21,5 @@ public abstract class PersonMapper {
     @Mapping(target = "name", source = "firstName")
     @Mapping(target = "surname", source = "lastName")
     @Mapping(target = "organizationStatus", source = "roleInClub")
-    public abstract ShortPersonDTO toShortPersonDTO (Person person);
+    public abstract ShortPersonDTO toShortPersonDTO(Person person);
 }

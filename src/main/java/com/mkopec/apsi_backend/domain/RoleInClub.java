@@ -2,14 +2,12 @@ package com.mkopec.apsi_backend.domain;
 
 import com.mkopec.apsi_backend.enums.RoleType;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "RoleInClub" )
+@Table(name = "RoleInClub")
 public class RoleInClub {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
