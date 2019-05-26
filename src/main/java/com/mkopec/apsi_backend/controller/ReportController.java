@@ -7,22 +7,18 @@ import com.mkopec.apsi_backend.dtos.ReportPostDTO;
 import com.mkopec.apsi_backend.mapper.ReportMapper;
 import com.mkopec.apsi_backend.service.ProjectService;
 import com.mkopec.apsi_backend.service.ReportService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 
 @RestController
 @RequestMapping("/report")
+@RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
     private final ProjectService projectService;
     private final ReportMapper reportMapper;
-
-    public ReportController(ReportService reportService, ProjectService projectService, ReportMapper reportMapper) {
-        this.reportService = reportService;
-        this.projectService = projectService;
-        this.reportMapper = reportMapper;
-    }
 
     @PostMapping("/{id}")
     public ReportDTO postReport(@RequestBody ReportPostDTO reportPostDTO, @PathVariable Integer id) {

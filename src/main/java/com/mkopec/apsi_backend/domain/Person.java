@@ -1,20 +1,21 @@
 package com.mkopec.apsi_backend.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Data
 @Entity
 @Table(name = "Person")
 public class Person {
 
-    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
@@ -26,7 +27,6 @@ public class Person {
     @Column(name = "phone_number")
     private String phone_number;
 
-    @Column(name = "email")
     private String email;
 
     @Column(name = "date_from")
@@ -36,10 +36,9 @@ public class Person {
     @JoinColumn(name = "RoleinClub_id")
     private RoleInClub roleInClub;
 
-    @Column(name = "points")
     private Integer points;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToMany(cascade = ALL, mappedBy = "person", fetch = LAZY)
     private List<Activity> activities;
 
     @ManyToMany

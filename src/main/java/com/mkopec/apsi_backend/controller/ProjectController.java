@@ -8,6 +8,7 @@ import com.mkopec.apsi_backend.dtos.ShortProjectDTO;
 import com.mkopec.apsi_backend.mapper.ProjectMapper;
 import com.mkopec.apsi_backend.service.PersonService;
 import com.mkopec.apsi_backend.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -15,18 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/projects")
+@RequiredArgsConstructor
 public class ProjectController {
 
     private final ProjectService projectService;
     private final PersonService personService;
-
     private final ProjectMapper projectMapper;
-
-    public ProjectController(ProjectService projectService, PersonService personService, ProjectMapper projectMapper) {
-        this.projectService = projectService;
-        this.personService = personService;
-        this.projectMapper = projectMapper;
-    }
 
     @GetMapping
     public List<ShortProjectDTO> getAllProjects() {
@@ -50,7 +45,6 @@ public class ProjectController {
 
         return projectMapper.toShortProjectDTO(savedProject);
     }
-
 
     @DeleteMapping("/{id}")
     public void deleteProject(@PathVariable Integer id) {

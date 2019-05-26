@@ -1,11 +1,12 @@
 package com.mkopec.apsi_backend.exception;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @Getter
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@ResponseStatus(value = NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
     private String resourceName;
 
