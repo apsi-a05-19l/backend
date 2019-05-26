@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 import static java.util.Collections.singletonList;
 
@@ -17,8 +16,7 @@ public class MyUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> authorities = singletonList(new SimpleGrantedAuthority("User"));
-        return authorities;
+        return singletonList(new SimpleGrantedAuthority(user.getAuthority()));
     }
 
     @Override
