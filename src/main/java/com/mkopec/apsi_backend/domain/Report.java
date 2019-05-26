@@ -1,25 +1,22 @@
 package com.mkopec.apsi_backend.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Data
 @Entity
 @Table(name = "Report")
 public class Report {
 
-    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
-    @Column(name = "content")
     private String content;
 
-    @Column(name = "date")
     @Basic
     @Temporal(TemporalType.DATE)
     private java.util.Calendar date;

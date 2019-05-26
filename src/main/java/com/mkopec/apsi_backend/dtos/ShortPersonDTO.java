@@ -1,11 +1,9 @@
 package com.mkopec.apsi_backend.dtos;
 
 import com.mkopec.apsi_backend.enums.RoleType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ShortPersonDTO {
     private Integer id;
     private String name;

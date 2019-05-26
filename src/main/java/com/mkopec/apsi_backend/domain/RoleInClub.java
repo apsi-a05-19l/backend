@@ -1,25 +1,20 @@
 package com.mkopec.apsi_backend.domain;
 
 import com.mkopec.apsi_backend.enums.RoleType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Data
 @Entity
 @Table(name = "RoleInClub")
 public class RoleInClub {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
-    public RoleType getName() {
-        return name;
-    }
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
     private RoleType name;
 }
