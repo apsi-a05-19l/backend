@@ -12,12 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
+
+import static javax.servlet.http.HttpServletResponse.SC_OK;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Configuration
 @EnableWebSecurity
@@ -35,8 +39,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implement
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors();
-        super.configure(http);
+        http.cors().and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(UNAUTHORIZED))
+                .and().authorizeRequests().antMatchers("/login").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().successHandler((request, response, authentication) -> response.setStatus(SC_OK)
+                ).and().csrf().disable();
     }
 
     @Bean
@@ -56,8 +65,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implement
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
