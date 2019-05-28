@@ -34,7 +34,7 @@ public abstract class ProjectMapper {
     public abstract FullProjectDTO toFullProjectDTO(Project project);
 
     protected String nameDetails(Person person) {
-        return person.getFirstName() + " " + person.getLastName();
+        return person.getName() + " " + person.getSurname();
     }
 
     @Mapping(target = "name", source = "name")

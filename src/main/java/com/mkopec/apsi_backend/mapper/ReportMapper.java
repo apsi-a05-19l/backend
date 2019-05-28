@@ -20,7 +20,7 @@ public abstract class ReportMapper {
 
     protected String getPersonName(Report report) {
         Person p = report.getPerson();
-        return p.getFirstName() + " " + p.getLastName();
+        return p.getName() + " " + p.getSurname();
     }
 
     @Mapping(target = "content", source = "text")

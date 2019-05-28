@@ -19,10 +19,10 @@ public class Person {
     private Integer id;
 
     @Column(name = "first_name")
-    private String firstName;
+    private String name;
 
     @Column(name = "last_name")
-    private String lastName;
+    private String surname;
 
     @Column(name = "phone_number")
     private String phone_number;
