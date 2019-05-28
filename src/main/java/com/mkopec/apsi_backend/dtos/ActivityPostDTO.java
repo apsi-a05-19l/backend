@@ -7,7 +7,7 @@ public class ActivityPostDTO {
 
     private Integer id;
 
-    private String activityName;
+    private String name;
 
-    private Integer activityPoints;
+    private Integer points;
 }
