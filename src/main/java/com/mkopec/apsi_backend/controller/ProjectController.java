@@ -1,5 +1,6 @@
 package com.mkopec.apsi_backend.controller;
 
+import com.mkopec.apsi_backend.auth.domain.User;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.Project;
 import com.mkopec.apsi_backend.dtos.FullProjectDTO;
@@ -9,6 +10,7 @@ import com.mkopec.apsi_backend.mapper.ProjectMapper;
 import com.mkopec.apsi_backend.service.PersonService;
 import com.mkopec.apsi_backend.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -24,6 +26,7 @@ public class ProjectController {
     private final ProjectMapper projectMapper;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<ShortProjectDTO> getAllProjects() {
         return projectMapper.toShortProjectDTOs(projectService.getAllProjects());
     }
