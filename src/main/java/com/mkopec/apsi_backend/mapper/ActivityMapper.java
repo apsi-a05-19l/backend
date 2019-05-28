@@ -13,12 +13,8 @@ public abstract class ActivityMapper {
 
     public abstract ActivityDTO toActivityDTO(Activity activity);
 
-    @Mapping(target = "points", source = "activityPoints")
-    @Mapping(target = "name", source = "activityName")
     public abstract Activity toActivity(ActivityPostDTO activityDTO);
 
-    @Mapping(target = "activityPoints", source = "points")
-    @Mapping(target = "activityName", source = "name")
     public abstract ActivityPostDTO toActivityPostDTO(Activity activity);
 
     public abstract List<ActivityDTO> toActivityDTOs(List<Activity> activities);

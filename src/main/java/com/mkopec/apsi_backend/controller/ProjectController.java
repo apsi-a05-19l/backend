@@ -1,6 +1,5 @@
 package com.mkopec.apsi_backend.controller;
 
-import com.mkopec.apsi_backend.auth.domain.User;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.Project;
 import com.mkopec.apsi_backend.dtos.FullProjectDTO;
