@@ -8,6 +8,7 @@ import com.mkopec.apsi_backend.mapper.ReportMapper;
 import com.mkopec.apsi_backend.service.ProjectService;
 import com.mkopec.apsi_backend.service.ReportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -21,6 +22,7 @@ public class ReportController {
     private final ReportMapper reportMapper;
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public ReportDTO postReport(@RequestBody ReportPostDTO reportPostDTO, @PathVariable Integer id) {
         Project project = projectService.getSingleProject(id);
 
@@ -34,6 +36,7 @@ public class ReportController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteReport(@PathVariable Integer id) {
         reportService.deleteReport(id);
     }

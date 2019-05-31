@@ -6,6 +6,7 @@ import com.mkopec.apsi_backend.dtos.ShortPersonDTO;
 import com.mkopec.apsi_backend.mapper.PersonMapper;
 import com.mkopec.apsi_backend.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,13 @@ public class PersonController {
     private final PersonMapper mapper;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public PersonDTO getSinglePerson(@PathVariable Integer id) {
         return mapper.toPersonDTO(personService.getSinglePerson(id));
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public List<ShortPersonDTO> getAllPersons() {
         return mapper.toShortPersonDTOs(personService.getAllPersons());
     }

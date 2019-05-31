@@ -25,17 +25,20 @@ public class ProjectController {
     private final ProjectMapper projectMapper;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public List<ShortProjectDTO> getAllProjects() {
         return projectMapper.toShortProjectDTOs(projectService.getAllProjects());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public FullProjectDTO getProjectDetails(@PathVariable Integer id) {
         return projectMapper.toFullProjectDTO(projectService.getSingleProject(id));
     }
 
     @PostMapping
+//    @PreAuthorize("hasAuthority('ADMIN') or (hasAuthority('User') and #projectPostDTO.leaderId == MY_ID)")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public ShortProjectDTO saveProject(@RequestBody ProjectPostDTO projectPostDTO) {
         Person leader = personService.getSinglePerson(projectPostDTO.getLeaderId());
 
@@ -49,6 +52,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteProject(@PathVariable Integer id) {
         projectService.deleteProject(id);
     }

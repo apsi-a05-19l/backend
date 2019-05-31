@@ -7,6 +7,7 @@ import com.mkopec.apsi_backend.mapper.ActivityMapper;
 import com.mkopec.apsi_backend.service.ActivityService;
 import com.mkopec.apsi_backend.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -21,11 +22,14 @@ public class ActivityController {
     private final ActivityMapper mapper;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public List<ActivityDTO> getAllActivities() {
         return mapper.toActivityDTOs(activityService.getAllActivities());
     }
 
     @PostMapping("/{id}")
+//    @PreAuthorize("hasAuthority('ADMIN') or (hasAuthority('User') and #id == MY_ID)")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public ActivityPostDTO postActivity(@RequestBody ActivityPostDTO activityPostDTO, @PathVariable Integer id) {
 
         Activity activity = mapper.toActivity(activityPostDTO);
@@ -39,6 +43,7 @@ public class ActivityController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteActivity(@PathVariable Integer id) {
         activityService.deleteActivity(id);
     }
