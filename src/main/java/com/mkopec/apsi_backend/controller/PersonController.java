@@ -22,13 +22,11 @@ public class PersonController {
     private final PersonMapper mapper;
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public PersonDTO getSinglePerson(@PathVariable Integer id) {
         return mapper.toPersonDTO(personService.getSinglePerson(id));
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public List<ShortPersonDTO> getAllPersons() {
         return mapper.toShortPersonDTOs(personService.getAllPersons());
     }

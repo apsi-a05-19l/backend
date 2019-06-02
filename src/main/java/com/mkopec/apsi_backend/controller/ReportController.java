@@ -22,7 +22,7 @@ public class ReportController {
     private final ReportMapper reportMapper;
 
     @PostMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ReportDTO postReport(@RequestBody ReportPostDTO reportPostDTO, @PathVariable Integer id) {
         Project project = projectService.getSingleProject(id);
 

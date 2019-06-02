@@ -22,14 +22,12 @@ public class ActivityController {
     private final ActivityMapper mapper;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
     public List<ActivityDTO> getAllActivities() {
         return mapper.toActivityDTOs(activityService.getAllActivities());
     }
 
     @PostMapping("/{id}")
-//    @PreAuthorize("hasAuthority('ADMIN') or (hasAuthority('User') and #id == MY_ID)")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('User')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ActivityPostDTO postActivity(@RequestBody ActivityPostDTO activityPostDTO, @PathVariable Integer id) {
 
         Activity activity = mapper.toActivity(activityPostDTO);
