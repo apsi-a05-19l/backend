@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
+import java.util.List;
 
 @RestController
 @RequestMapping("/report")
@@ -39,5 +40,10 @@ public class ReportController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteReport(@PathVariable Integer id) {
         reportService.deleteReport(id);
+    }
+
+    @GetMapping
+    public List<ReportDTO> getAll() {
+        return reportMapper.toReportDTOs(reportService.findAll());
     }
 }

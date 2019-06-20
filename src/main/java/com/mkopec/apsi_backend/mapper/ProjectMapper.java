@@ -35,6 +35,6 @@ public abstract class ProjectMapper {
         return person.getName() + " " + person.getSurname();
     }
 
-    @Mapping(target = "name", source = "name")
+    @Mapping(target = "projectLeader.id", source = "leaderId")
     public abstract Project toProject(ProjectPostDTO projectPostDTO);
 }
