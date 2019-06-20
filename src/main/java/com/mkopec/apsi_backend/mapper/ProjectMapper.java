@@ -20,8 +20,6 @@ public abstract class ProjectMapper {
     @Autowired
     protected PersonMapper personMapper;
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
     public abstract ShortProjectDTO toShortProjectDTO(Project project);
 
     public abstract List<ShortProjectDTO> toShortProjectDTOs(List<Project> projects);

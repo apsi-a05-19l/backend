@@ -1,6 +1,7 @@
 package com.mkopec.apsi_backend.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +23,10 @@ public class Project {
     private java.util.Calendar date;
 
     private String name;
+
+    @Column(name = "is_archived",columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private Boolean isArchived;
 
     @OneToOne
     @JoinColumn(name = "project_leader", referencedColumnName = "id")
