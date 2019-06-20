@@ -34,7 +34,7 @@ public class Project {
     @JoinColumn(name = "project_leader", referencedColumnName = "id")
     private Person projectLeader;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(mappedBy = "projects", fetch = LAZY)
     private List<Person> persons;
 
     @OneToMany(mappedBy = "project", fetch = LAZY, cascade = ALL, orphanRemoval = true)
