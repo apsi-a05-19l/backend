@@ -6,7 +6,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -34,7 +34,7 @@ public class Project {
     @JoinColumn(name = "project_leader", referencedColumnName = "id")
     private Person projectLeader;
 
-    @ManyToMany(mappedBy = "projects", fetch = LAZY, cascade = {MERGE, PERSIST, DETACH, REFRESH})
+    @ManyToMany(mappedBy = "projects", fetch = LAZY)
     private List<Person> persons;
 
     @OneToMany(mappedBy = "project", fetch = LAZY, cascade = ALL, orphanRemoval = true)
