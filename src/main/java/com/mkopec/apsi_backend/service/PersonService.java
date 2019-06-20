@@ -20,6 +20,7 @@ public class PersonService {
     private final RoleRepository roleRepository;
     private final PostRepository postRepository;
     private final PersonsProjectsRepository personsProjectsRepository;
+    private final ProjectRepository projectRepository;
 
     public Person getSinglePerson(Integer id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person", "id", id));
@@ -49,14 +50,11 @@ public class PersonService {
 
     @Transactional
     public void deleteByID(Integer memberID) {
-        personsProjectsRepository.deleteAllByPersonID(memberID);
-
-        List<Post> postsToUpdate = postRepository.findAllByAuthorId(memberID);
-        for (Post p : postsToUpdate){
-            p.setAuthor(null);
+        if (projectRepository.existsProjectByProjectLeaderId(memberID)) {
+            throw new IllegalArgumentException("Project leader can not be removed. First change project leader to another member");
         }
-        postRepository.saveAll(postsToUpdate);
 
+        personsProjectsRepository.deleteAllByPersonID(memberID);
         repository.deleteById(memberID);
     }
 

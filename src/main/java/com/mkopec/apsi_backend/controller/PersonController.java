@@ -49,4 +49,10 @@ public class PersonController {
     public PersonPostDTO archiveMember(@PathVariable Integer memberID) {
         return mapper.toPersonPostDTO(personService.archivePerson(memberID));
     }
+
+    @DeleteMapping("/{memberID}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteMember(@PathVariable Integer memberID) {
+        personService.deleteByID(memberID);
+    }
 }

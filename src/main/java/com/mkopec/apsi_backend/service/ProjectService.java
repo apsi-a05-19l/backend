@@ -85,6 +85,11 @@ public class ProjectService {
     public Project updateProject(ProjectPostDTO dto) {
         Person newLeader = personRepository.getOne(dto.getLeaderId());
         Project project = repository.getOne(dto.getId());
+
+        if (!project.getPersons().contains(newLeader)) {
+            throw new IllegalArgumentException("Person with id: " + newLeader.getId() + " is not member of the project!");
+        }
+
         project.setProjectLeader(newLeader);
         project.setName(dto.getName());
 

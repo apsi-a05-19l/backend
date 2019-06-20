@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -25,7 +27,7 @@ public class Report {
     @JoinColumn(name = "Project_id")
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(cascade = {MERGE, PERSIST, DETACH, REFRESH}, fetch = LAZY)
     @JoinColumn(name = "Person_id")
     private Person person;
 }
