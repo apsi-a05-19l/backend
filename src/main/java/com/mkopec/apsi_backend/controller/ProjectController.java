@@ -3,6 +3,7 @@ package com.mkopec.apsi_backend.controller;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.Project;
 import com.mkopec.apsi_backend.dtos.FullProjectDTO;
+import com.mkopec.apsi_backend.dtos.ProjectPersonPutDTO;
 import com.mkopec.apsi_backend.dtos.ProjectPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortProjectDTO;
 import com.mkopec.apsi_backend.mapper.ProjectMapper;
@@ -43,6 +44,7 @@ public class ProjectController {
         project.setDate(Calendar.getInstance());
         project.setProjectLeader(leader);
         project.setIsArchived(false);
+        project.getPersons().add(leader);
 
         return projectMapper.toShortProjectDTO(projectService.saveProject(project));
     }
@@ -60,5 +62,30 @@ public class ProjectController {
         project.setIsArchived(dto.getIsArchived());
         project.setName(dto.getName());
         return projectMapper.toShortProjectDTO(projectService.saveProject(project));
+    }
+
+    @PutMapping("/addMember/{projectID}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public FullProjectDTO addMemberToProject(@RequestBody ProjectPersonPutDTO personDTO, @PathVariable Integer projectID) {
+        Project project = projectService.getSingleProject(projectID);
+        Person person = personService.getSinglePerson(personDTO.getId());
+        if (!project.getPersons().contains(person)) {
+            project.getPersons().add(person);
+            project = projectService.saveProject(project);
+        }
+        return projectMapper.toFullProjectDTO(project);
+    }
+
+    @PutMapping("/removeMember/{projectID}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public FullProjectDTO removeMemberFromProject(@RequestBody ProjectPersonPutDTO personDTO, @PathVariable Integer projectID) {
+        Project project = projectService.getSingleProject(projectID);
+        Person person = personService.getSinglePerson(personDTO.getId());
+        if (!project.getPersons().contains(person) && !project.getProjectLeader().equals(person)) {
+            project.getPersons().add(person);
+            person.getProjects().add(project);
+            project = projectService.saveProject(project);
+        }
+        return projectMapper.toFullProjectDTO(project);
     }
 }

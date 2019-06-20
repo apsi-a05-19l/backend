@@ -5,6 +5,8 @@ import com.mkopec.apsi_backend.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ReportService {
@@ -16,5 +18,9 @@ public class ReportService {
 
     public void deleteReport(Integer id) {
         repository.deleteById(id);
+    }
+
+    public List<Report> findAll() {
+        return repository.findAll();
     }
 }
