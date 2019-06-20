@@ -6,6 +6,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -35,6 +37,6 @@ public class Project {
     @ManyToMany(mappedBy = "projects")
     private List<Person> persons;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = LAZY, cascade = ALL, orphanRemoval = true)
     private List<Report> reports;
 }
