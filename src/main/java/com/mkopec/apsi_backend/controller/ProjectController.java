@@ -42,15 +42,23 @@ public class ProjectController {
         Project project = projectMapper.toProject(projectPostDTO);
         project.setDate(Calendar.getInstance());
         project.setProjectLeader(leader);
+        project.setIsArchived(false);
 
-        Project savedProject = projectService.saveProject(project);
-
-        return projectMapper.toShortProjectDTO(savedProject);
+        return projectMapper.toShortProjectDTO(projectService.saveProject(project));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteProject(@PathVariable Integer id) {
         projectService.deleteProject(id);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ShortProjectDTO updateProject(@RequestBody ShortProjectDTO dto) {
+        Project project = projectService.getSingleProject(dto.getId());
+        project.setIsArchived(dto.getIsArchived());
+        project.setName(dto.getName());
+        return projectMapper.toShortProjectDTO(projectService.saveProject(project));
     }
 }
