@@ -4,5 +4,6 @@ public enum RoleType {
     MEMBER,
     MANAGEMENT,
     RECRUIT,
-    HONORARY_MEMBER
+    HONORARY_MEMBER,
+    FORMER_MEMBER
 }

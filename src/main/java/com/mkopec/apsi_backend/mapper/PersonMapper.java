@@ -3,11 +3,13 @@ package com.mkopec.apsi_backend.mapper;
 import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.domain.RoleInClub;
 import com.mkopec.apsi_backend.dtos.PersonDTO;
+import com.mkopec.apsi_backend.dtos.PersonPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortPersonDTO;
 import com.mkopec.apsi_backend.dtos.SimplePersonDTO;
 import com.mkopec.apsi_backend.enums.RoleType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -39,4 +41,14 @@ public abstract class PersonMapper {
     protected String nameDetails(Person person) {
         return person.getName() + " " + person.getSurname();
     }
+
+    @Mappings({
+            @Mapping(target = "roleInClub.id", source = "roleID"),
+    })
+    public abstract Person toPersonDTO(PersonPostDTO dto);
+
+    @Mappings({
+            @Mapping(target = "roleID", source = "roleInClub.id"),
+    })
+    public abstract PersonPostDTO toPersonPostDTO(Person person);
 }
