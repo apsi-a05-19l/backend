@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ReportPostDTO {
-
+    private Integer id;
     private String text;
 }

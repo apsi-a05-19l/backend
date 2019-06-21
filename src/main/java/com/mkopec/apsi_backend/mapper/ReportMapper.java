@@ -23,6 +23,7 @@ public abstract class ReportMapper {
         return p != null ? (p.getName() + " " + p.getSurname()) : null;
     }
 
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "content", source = "text")
     public abstract Report toReport(ReportPostDTO reportPostDTO);
  }

@@ -1,17 +1,14 @@
 package com.mkopec.apsi_backend.controller;
 
-import com.mkopec.apsi_backend.domain.Project;
 import com.mkopec.apsi_backend.domain.Report;
 import com.mkopec.apsi_backend.dtos.ReportDTO;
 import com.mkopec.apsi_backend.dtos.ReportPostDTO;
 import com.mkopec.apsi_backend.mapper.ReportMapper;
-import com.mkopec.apsi_backend.service.ProjectService;
 import com.mkopec.apsi_backend.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -19,21 +16,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
-    private final ProjectService projectService;
     private final ReportMapper reportMapper;
 
-    @PostMapping("/{id}")
+    @PostMapping("/{projectID}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ReportDTO postReport(@RequestBody ReportPostDTO reportPostDTO, @PathVariable Integer id) {
-        Project project = projectService.getSingleProject(id);
-
+    public ReportDTO postReport(@RequestBody ReportPostDTO reportPostDTO, @PathVariable Integer projectID) {
         Report report = reportMapper.toReport(reportPostDTO);
-        report.setProject(project);
-        report.setPerson(project.getProjectLeader());
-        report.setDate(Calendar.getInstance());
-        Report savedReport = reportService.saveReport(report);
-
-        return reportMapper.toReportDTO(savedReport);
+        return reportMapper.toReportDTO(reportService.saveReport(report, projectID));
     }
 
     @DeleteMapping("/{id}")
@@ -45,5 +34,12 @@ public class ReportController {
     @GetMapping
     public List<ReportDTO> getAll() {
         return reportMapper.toReportDTOs(reportService.findAll());
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ReportDTO updateReport(@RequestBody ReportPostDTO postDTO) {
+        Report newOne = reportMapper.toReport(postDTO);
+        return reportMapper.toReportDTO(reportService.updateReport(newOne));
     }
 }
