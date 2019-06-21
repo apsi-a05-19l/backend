@@ -1,13 +1,14 @@
 package com.mkopec.apsi_backend.controller;
 
 
+import com.mkopec.apsi_backend.domain.Post;
+import com.mkopec.apsi_backend.dtos.FullPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortPostDTO;
 import com.mkopec.apsi_backend.mapper.PostMapper;
 import com.mkopec.apsi_backend.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +24,19 @@ public class PostController {
         return mapper.toShortPostDTOs (postService.getAllPosts());
     }
 
-    // @GetMapping("/{id}")
-    // public FullPostDTO
+    @GetMapping("/{id}")
+    public FullPostDTO getSinglePost(@PathVariable Integer id) {
+        return mapper.toFullPostDTO (postService.getSinglePost(id));
+    }
 
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public FullPostDTO postPost (@RequestBody FullPostDTO fullPostDTO, @PathVariable Integer memberId) {
+     Post post = mapper.toPost(fullPostDTO);
+     return mapper.toFullPostDTO(postService.postPost(post, memberId));
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deletePost(@PathVariable Integer id) { postService.deletePost(id); }
 }

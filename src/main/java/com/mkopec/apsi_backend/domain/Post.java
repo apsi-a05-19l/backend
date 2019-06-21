@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -22,4 +24,7 @@ public class Post {
     private Person author;
 
     private String topic;
+
+    @OneToMany
+    private List<Part> parts;
 }

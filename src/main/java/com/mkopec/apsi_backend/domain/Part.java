@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -22,4 +24,7 @@ public class Part {
     @ManyToOne
     @JoinColumn(name = "Post_id", referencedColumnName = "id")
     private Post post_id;
+
+    @OneToMany
+    private List<Link> links;
 }

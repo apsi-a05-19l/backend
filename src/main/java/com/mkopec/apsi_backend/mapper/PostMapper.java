@@ -1,8 +1,8 @@
 package com.mkopec.apsi_backend.mapper;
 
 import com.mkopec.apsi_backend.domain.Post;
+import com.mkopec.apsi_backend.dtos.FullPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortPostDTO;
-import com.mkopec.apsi_backend.enums.PostTopic;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ public abstract class PostMapper {
 
     @Autowired
     protected PostMapper postMapper;
+    @Autowired
+    protected PartMapper partMapper;
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "title", source = "title")
@@ -21,4 +23,10 @@ public abstract class PostMapper {
     public abstract ShortPostDTO toShortPostDTO(Post post);
 
     public abstract List<ShortPostDTO> toShortPostDTOs(List<Post> posts);
+
+    @Mapping(target = "parts", source = "java(partMapper.toPartDTO(post.getParts())")
+    public abstract FullPostDTO toFullPostDTO(Post post);
+
+    public abstract Post toPost(FullPostDTO postDTO);
+
 }
