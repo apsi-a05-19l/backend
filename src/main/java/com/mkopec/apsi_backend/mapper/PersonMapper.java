@@ -26,6 +26,7 @@ public abstract class PersonMapper {
     @Mapping(target = "activities", source = "activities")
     @Mapping(target = "organisationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
     @Mapping(target = "projects", expression = "java(projectMapper.toShortProjectDTOs(person.getProjects()))")
+    @Mapping(target = "roleID", expression = "java(person.getRoleInClub().getId())")
     public abstract PersonDTO toPersonDTO(Person person);
 
     @Mapping(target = "organisationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
