@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class RoleMapper {
 
-    @Mapping(target = "organizationStatus", expression = "java(getRoleName(roleInClub))")
+    @Mapping(target = "organisationStatus", expression = "java(getRoleName(roleInClub))")
     public abstract RoleDTO toRoleDTO(RoleInClub roleInClub);
 
     public abstract List<RoleDTO> toRoleDTOs(List<RoleInClub> roleInClubList);

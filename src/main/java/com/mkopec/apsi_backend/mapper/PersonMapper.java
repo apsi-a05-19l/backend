@@ -24,15 +24,11 @@ public abstract class PersonMapper {
     protected RoleMapper roleMapper;
 
     @Mapping(target = "activities", source = "activities")
-    @Mapping(target = "organizationStatus", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
+    @Mapping(target = "organisationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
     @Mapping(target = "projects", expression = "java(projectMapper.toShortProjectDTOs(person.getProjects()))")
     public abstract PersonDTO toPersonDTO(Person person);
 
-    public RoleType roleInClubToRoleType(RoleInClub roleInClub) {
-        return roleInClub.getName();
-    }
-
-    @Mapping(target = "organizationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
+    @Mapping(target = "organisationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
     public abstract ShortPersonDTO toShortPersonDTO(Person person);
 
     public abstract SimplePersonDTO toSimplePersonDTO(Person person);

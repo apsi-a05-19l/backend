@@ -1,6 +1,5 @@
 package com.mkopec.apsi_backend.dtos;
 
-import com.mkopec.apsi_backend.enums.RoleType;
 import lombok.Data;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class PersonDTO {
 
     private String surname;
 
-    private RoleType organizationStatus;
+    private String organisationStatus;
 
     private Integer points;
 

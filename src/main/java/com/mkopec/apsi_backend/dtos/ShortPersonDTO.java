@@ -7,6 +7,6 @@ public class ShortPersonDTO {
     private Integer id;
     private String name;
     private String surname;
-    private String organizationStatus;
+    private String organisationStatus;
     private Integer points;
 }
