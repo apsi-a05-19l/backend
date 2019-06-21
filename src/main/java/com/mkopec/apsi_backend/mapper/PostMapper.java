@@ -1,6 +1,8 @@
 package com.mkopec.apsi_backend.mapper;
 
+import com.mkopec.apsi_backend.domain.Part;
 import com.mkopec.apsi_backend.domain.Post;
+import com.mkopec.apsi_backend.dtos.FullPartDTO;
 import com.mkopec.apsi_backend.dtos.FullPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortPostDTO;
 import org.mapstruct.Mapper;
@@ -12,8 +14,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class PostMapper {
 
-    @Autowired
-    protected PostMapper postMapper;
     @Autowired
     protected PartMapper partMapper;
 
@@ -28,5 +28,8 @@ public abstract class PostMapper {
     public abstract FullPostDTO toFullPostDTO(Post post);
 
     public abstract Post toPost(FullPostDTO postDTO);
+
+    @Mapping(target = "links", source = "java(linkMapper.toLinkDTO(part.getLinks())")
+    public abstract Part toPart (FullPartDTO partDTO);
 
 }

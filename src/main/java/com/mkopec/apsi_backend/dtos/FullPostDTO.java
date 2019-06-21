@@ -17,5 +17,5 @@ public class FullPostDTO {
 
     private PostTopic postTopic;
 
-    private List<PartDTO> parts;
+    private List<FullPartDTO> parts;
 }

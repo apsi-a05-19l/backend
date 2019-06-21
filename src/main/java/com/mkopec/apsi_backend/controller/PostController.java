@@ -1,10 +1,13 @@
 package com.mkopec.apsi_backend.controller;
 
 
+import com.mkopec.apsi_backend.domain.Part;
 import com.mkopec.apsi_backend.domain.Post;
+import com.mkopec.apsi_backend.dtos.FullPartDTO;
 import com.mkopec.apsi_backend.dtos.FullPostDTO;
 import com.mkopec.apsi_backend.dtos.ShortPostDTO;
 import com.mkopec.apsi_backend.mapper.PostMapper;
+import com.mkopec.apsi_backend.service.PartService;
 import com.mkopec.apsi_backend.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +21,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
     private final PostMapper mapper;
+    private final PartService partService;
 
     @GetMapping()
     public List<ShortPostDTO> getAllPosts() {
@@ -33,6 +37,8 @@ public class PostController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public FullPostDTO postPost (@RequestBody FullPostDTO fullPostDTO, @PathVariable Integer memberId) {
      Post post = mapper.toPost(fullPostDTO);
+     List<Part> parts = partService.getAllParts(post.getParts());
+     post.setParts(parts);
      return mapper.toFullPostDTO(postService.postPost(post, memberId));
     }
 

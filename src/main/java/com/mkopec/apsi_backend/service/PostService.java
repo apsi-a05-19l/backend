@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository repository;
-    private final PersonService personService;
     private final PersonRepository personRepository;
 
     public Post getSinglePost(Integer id) {
