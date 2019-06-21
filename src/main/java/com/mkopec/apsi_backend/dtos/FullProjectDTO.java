@@ -13,6 +13,8 @@ public class FullProjectDTO {
 
     private String currentLeader;
 
+    private Boolean isArchived;
+
     private List<ReportDTO> reports;
 
     private List<SimplePersonDTO> members;
