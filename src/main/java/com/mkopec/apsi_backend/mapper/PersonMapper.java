@@ -20,6 +20,9 @@ public abstract class PersonMapper {
     @Autowired
     protected ProjectMapper projectMapper;
 
+    @Autowired
+    protected RoleMapper roleMapper;
+
     @Mapping(target = "activities", source = "activities")
     @Mapping(target = "organizationStatus", expression = "java(roleInClubToRoleType(person.getRoleInClub()))")
     @Mapping(target = "projects", expression = "java(projectMapper.toShortProjectDTOs(person.getProjects()))")
@@ -29,7 +32,7 @@ public abstract class PersonMapper {
         return roleInClub.getName();
     }
 
-    @Mapping(target = "organizationStatus", source = "roleInClub")
+    @Mapping(target = "organizationStatus", expression = "java(roleMapper.getRoleName(person.getRoleInClub()))")
     public abstract ShortPersonDTO toShortPersonDTO(Person person);
 
     public abstract SimplePersonDTO toSimplePersonDTO(Person person);
