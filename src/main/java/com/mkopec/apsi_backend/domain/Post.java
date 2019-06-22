@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -19,12 +20,10 @@ public class Post {
 
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "author", referencedColumnName = "id")
-    private Person author;
+    private Integer authorId;
 
     private String topic;
 
-    @OneToMany
+    @OneToMany(cascade = ALL, orphanRemoval = true)
     private List<Part> parts;
 }

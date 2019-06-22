@@ -23,7 +23,7 @@ public class Part {
 
     @ManyToOne
     @JoinColumn(name = "Post_id", referencedColumnName = "id")
-    private Post post_id;
+    private Post post;
 
     @OneToMany
     private List<Link> links;

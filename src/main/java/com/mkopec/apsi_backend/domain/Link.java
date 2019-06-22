@@ -21,6 +21,6 @@ public class Link {
 
     @ManyToOne
     @JoinColumn(name = "Part_id", referencedColumnName = "id")
-    private Part part_id;
+    private Part part;
 
 }

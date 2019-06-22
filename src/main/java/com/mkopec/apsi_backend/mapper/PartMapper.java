@@ -9,22 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper (componentModel = "spring")
+@Mapper (componentModel = "spring", uses = {LinkMapper.class})
 public abstract class PartMapper {
 
-    @Autowired
-    protected LinkMapper linkMapper;
-
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "header", source = "header")
+    @Mapping(target = "post_id", source = "post.id")
     public abstract ShortPartDTO toShortPartDTO (Part part);
 
     public abstract List<ShortPartDTO> toShortPartDTOS(List<Part> parts);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "header", source = "header")
-    @Mapping(target = "contents", source = "contents")
-    @Mapping(target = "links", source = "java(linkMapper.toLinkDTO(part.getLinks())")
+    @Mapping(target = "post_id", source = "post.id")
     public abstract FullPartDTO toFullPartDTO (Part part);
 
     public abstract Part toPart(FullPartDTO fullPartDTO);

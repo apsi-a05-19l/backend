@@ -1,6 +1,5 @@
 package com.mkopec.apsi_backend.dtos;
 
-import com.mkopec.apsi_backend.domain.Person;
 import com.mkopec.apsi_backend.enums.PostTopic;
 import lombok.Data;
 
@@ -13,7 +12,7 @@ public class FullPostDTO {
 
     private String title;
 
-    private Person author;
+    private Integer authorId;
 
     private PostTopic postTopic;
 
