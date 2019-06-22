@@ -1,5 +1,6 @@
 package com.mkopec.apsi_backend.domain;
 
+import com.mkopec.apsi_backend.enums.PostTopic;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,7 +23,8 @@ public class Post {
 
     private Integer authorId;
 
-    private String topic;
+    @Enumerated(EnumType.STRING)
+    private PostTopic topic;
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     private List<Part> parts;
