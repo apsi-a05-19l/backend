@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -25,6 +27,6 @@ public class Part {
     @JoinColumn(name = "Post_id", referencedColumnName = "id")
     private Post post;
 
-    @OneToMany
+    @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "part", fetch = LAZY)
     private List<Link> links;
 }

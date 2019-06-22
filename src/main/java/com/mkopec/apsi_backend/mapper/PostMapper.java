@@ -16,7 +16,9 @@ public abstract class PostMapper {
 
     public abstract List<ShortPostDTO> toShortPostDTOs(List<Post> posts);
 
+    @Mapping(target = "postTopic", source = "topic")
     public abstract FullPostDTO toFullPostDTO(Post post);
 
+    @Mapping(target = "topic", source = "postTopic")
     public abstract Post toPost(FullPostDTO postDTO);
 }

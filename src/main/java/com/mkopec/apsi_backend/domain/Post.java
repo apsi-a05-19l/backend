@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -21,11 +22,12 @@ public class Post {
 
     private String title;
 
+    @Column(name = "author")
     private Integer authorId;
 
     @Enumerated(EnumType.STRING)
     private PostTopic topic;
 
-    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "post", fetch = LAZY)
     private List<Part> parts;
 }

@@ -27,7 +27,8 @@ public class PostController {
 
     @GetMapping("/{id}")
     public FullPostDTO getSinglePost(@PathVariable Integer id) {
-        return mapper.toFullPostDTO (postService.getSinglePost(id));
+        Post post = postService.getSinglePost(id);
+        return mapper.toFullPostDTO (post);
     }
 
     @PostMapping
