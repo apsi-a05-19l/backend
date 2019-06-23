@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -38,17 +39,25 @@ public class PostService {
     }
 
     private List<Part> savePostParts(List<Part> parts, Post newPost) {
-        List<Part> newParts = new ArrayList<>();
-        parts.forEach(part -> {
-            part.setPost(newPost);
-            List<Link> links = part.getLinks();
-            part.setLinks(null);
-            Part newPart = partRepository.save(part);
-            links.forEach(link -> link.setPart(newPart));
-            newPart.setLinks(linkRepository.saveAll(links));
-            newParts.add(partRepository.save(newPart));
-        });
-        return newParts;
+        if(Objects.nonNull(parts)){
+            List<Part> newParts = new ArrayList<>();
+            parts.forEach(part -> {
+                part.setPost(newPost);
+                List<Link> links = part.getLinks();
+                part.setLinks(null);
+                Part newPart = partRepository.save(part);
+                if (Objects.nonNull(links)){
+                    links.forEach(link -> link.setPart(newPart));
+                    newPart.setLinks(linkRepository.saveAll(links));
+                    newParts.add(partRepository.save(newPart));
+                }
+                else {
+                    newParts.add(newPart);
+                }
+            });
+            return newParts;
+        }
+        return null;
     }
 
     public void deletePost(Integer id) {repository.deleteById(id);}
